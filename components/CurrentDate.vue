@@ -1,5 +1,5 @@
 <template>
-  <div class="text-lg">
+  <div class="text-lg text-gray-700">
     {{ currentDate.dayOfWeek }}, {{ currentDate.day }} {{ currentDate.month }},
     {{ currentDate.year }}
   </div>
