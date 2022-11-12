@@ -1,6 +1,7 @@
 <template>
-  <div class="flex">
-    <CurrentTime></CurrentTime>
+  <div class="flex flex-col">
+    <CurrentTime class="mb-3"></CurrentTime>
+    <CurrentDate class="pl-2"></CurrentDate>
   </div>
 </template>
 

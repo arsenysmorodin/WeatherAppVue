@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-cyan-50">
-    <div class="mx-auto min-h-screen max-w-screen-xl px-7">
+  <div class="bg-sky-50">
+    <div class="mx-auto min-h-screen max-w-screen-xl px-7 pt-10">
       <HeaderWrp></HeaderWrp>
     </div>
   </div>
