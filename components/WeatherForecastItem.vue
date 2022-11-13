@@ -7,7 +7,7 @@
       class="mb-4 w-24"
     />
     <p class="mb-4 text-lg font-semibold"><slot name="temp"></slot>°C</p>
-    <p class="font-light"><slot name="day"></slot></p>
+    <p class="text-base font-light text-gray-700"><slot name="day"></slot></p>
   </div>
 </template>
 <script>

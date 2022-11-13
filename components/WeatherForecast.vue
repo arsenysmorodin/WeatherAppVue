@@ -65,7 +65,6 @@ export default {
 
     try {
       const response = await axios.get(
-        // 'https://api.openweathermap.org/data/2.5/forecast/daily?lat=60&lon=90&appid=a158065199118bd588aed3a9d406f38f&units=metric'
         `https://api.openweathermap.org/data/2.5/forecast?lat=55&lon=37&appid=a158065199118bd588aed3a9d406f38f&units=metric`
       )
       let result = response.data.list
@@ -79,7 +78,6 @@ export default {
         result[num + 3 + 24],
         result[num + 3 + 31],
       ]
-      console.log(weatherData)
       this.weatherData = weatherData
     } catch (error) {
       console.error(error)
