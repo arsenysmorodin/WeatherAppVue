@@ -1,7 +1,9 @@
-<template lang="">
-  <div></div>
+<template>
+  <div><WeatherForecast></WeatherForecast></div>
 </template>
 <script>
-export default {}
+import WeatherForecast from './WeatherForecast.vue'
+
+export default { components: { WeatherForecast } }
 </script>
-<style lang=""></style>
+<style></style>
