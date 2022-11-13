@@ -1,15 +1,12 @@
 <template>
   <div>
-    <p class="text-6xl">{{ currentTime.hour }}:{{ currentTime.minutes }}</p>
+    <p class="text-6xl font-bold text-sky-500">
+      {{ currentTime.hour }}:{{ currentTime.minutes }}
+    </p>
   </div>
 </template>
 <script>
 export default {
-  //   data() {
-  //     return {
-  //       currentTime: '17:56',
-  //     }
-  //   },
   computed: {
     currentTime() {
       const date = new Date()
@@ -20,7 +17,6 @@ export default {
       if (currentTime.minutes.length === 1) {
         currentTime.minutes = '0' + currentTime.minutes
       }
-
       return currentTime
     },
   },

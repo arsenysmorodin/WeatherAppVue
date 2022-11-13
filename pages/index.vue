@@ -1,7 +1,8 @@
 <template>
-  <div class="bg-cyan-50">
-    <div class="mx-auto min-h-screen max-w-screen-xl px-7">
-      <HeaderWrp></HeaderWrp>
+  <div class="bg-sky-50">
+    <div class="mx-auto min-h-screen max-w-screen-xl px-7 pt-10">
+      <HeaderWrp class="mb-10"></HeaderWrp>
+      <MainWrp></MainWrp>
     </div>
   </div>
 </template>

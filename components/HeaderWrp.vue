@@ -1,11 +1,11 @@
 <template>
-  <div class="flex">
-    <CurrentTime></CurrentTime>
+  <div class="flex flex-col">
+    <CurrentTime class="mb-3"></CurrentTime>
+    <CurrentDate class="mb-3"></CurrentDate>
+    <HelloUser></HelloUser>
   </div>
 </template>
 
 <script>
-import CurrentTime from './CurrentTime.vue'
-
-export default { components: { CurrentTime } }
+export default {}
 </script>
