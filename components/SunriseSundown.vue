@@ -28,7 +28,6 @@ export default {
         `https://api.bf5.ru/sun?lat=55.7522200&lon=37.6155600`
       )
       this.sunData = response.data
-      console.log(this.sunData)
     } catch (error) {
       console.error(error)
     }
