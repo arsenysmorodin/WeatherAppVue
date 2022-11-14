@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       weather: {},
-      typesOfChildrens: ['Conditions', 'Temperature', 'Wind'],
+      typesOfChildrens: ['Temperature', 'Conditions', 'Wind'],
     }
   },
   async mounted() {

@@ -3,7 +3,7 @@
     <div class="flex">
       <img class="w-1/3" :src="require(`~/assets/img/${imageType}.png`)" />
       <p
-        :class="{ 'text-5xl': isBig, '-ml-24': isBig, 'text-3xl': !isBig }"
+        :class="{ 'text-5xl': isBig, '-ml-28': isBig, 'text-3xl': !isBig }"
         class="-ml-10 w-2/3 self-center text-center"
       >
         {{ weatherData[this.cartTypeLowerCase] }}
@@ -27,7 +27,7 @@ export default {
       this.weatherData[this.cartType.toLowerCase()]
     },
     isBig() {
-      if (this.cartType === 'Conditions') {
+      if (this.cartType === 'Temperature') {
         return true
       } else {
         return false
