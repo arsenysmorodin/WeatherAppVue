@@ -1,6 +1,6 @@
 <template>
   <div class="rounded-xl bg-white p-5 shadow-lg shadow-slate-200">
-    <h3 class="text-lg text-gray-700">Weather now</h3>
+    <h3 class="mb-5 text-lg text-gray-700">Weather now</h3>
     <div class="flex flex-wrap">
       <WeatherNowItem
         v-for="(item, index) in typesOfChildrens"
