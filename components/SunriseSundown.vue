@@ -25,12 +25,18 @@ export default {
     const axios = require('axios')
     try {
       const response = await axios.get(
-        `https://api.bf5.ru/sun?lat=55.7522200&lon=37.6155600`
+        `https://api.bf5.ru/sun?lat=${this.location.lat}&lon=${this.location.lon}`
       )
       this.sunData = response.data
     } catch (error) {
       console.error(error)
     }
+  },
+  computed: {
+    location() {
+      let location = this.$store.state.defaultLocation
+      return location
+    },
   },
   components: { SunriseSundownItem },
 }

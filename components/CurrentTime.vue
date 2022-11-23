@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-6xl font-bold text-sky-500">
-      {{ currentTime.hour }}:{{ currentTime.minutes }}
+      {{ currentTime.hour }}:{{ currentTime.minutes }}, {{ this.location.name }}
     </p>
   </div>
 </template>
@@ -18,6 +18,10 @@ export default {
         currentTime.minutes = '0' + currentTime.minutes
       }
       return currentTime
+    },
+    location() {
+      let location = this.$store.state.defaultLocation
+      return location
     },
   },
 }

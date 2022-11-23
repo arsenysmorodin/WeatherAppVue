@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'w-full': isBig, 'w-1/2': !isBig }" class="w-1/2">
+  <div :class="{ 'w-full': isBig, 'w-1/2': !isBig }">
     <div class="flex">
       <img class="w-1/3" :src="require(`~/assets/img/${imageType}.png`)" />
       <p
@@ -27,7 +27,7 @@ export default {
       this.weatherData[this.cartType.toLowerCase()]
     },
     isBig() {
-      if (this.cartType === 'Temperature') {
+      if (this.cartType === 'Conditions') {
         return true
       } else {
         return false

@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       weather: {},
-      typesOfChildrens: ['Temperature', 'Conditions', 'Wind'],
+      typesOfChildrens: ['Conditions', 'Temperature', 'Wind'],
     }
   },
   async mounted() {
@@ -25,7 +25,7 @@ export default {
 
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=55&lon=37&appid=a158065199118bd588aed3a9d406f38f&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${this.location.lat}&lon=${this.location.lon}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
       )
       let result = response.data
       let weatherData = {
@@ -37,6 +37,12 @@ export default {
     } catch (error) {
       console.error(error)
     }
+  },
+  computed: {
+    location() {
+      let location = this.$store.state.defaultLocation
+      return location
+    },
   },
 }
 </script>
