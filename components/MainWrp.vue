@@ -1,6 +1,5 @@
 <template>
-  <div class>
-    <WeatherForecast class="mb-7"></WeatherForecast>
+  <div>
     <div class="flex">
       <WeatherNow class="mr-4 flex w-1/2 flex-col"></WeatherNow>
       <div class="flex w-1/2 flex-col">

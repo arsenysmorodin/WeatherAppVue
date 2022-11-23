@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-3/5 justify-between">
+  <div class="flex w-full justify-between">
     <WeatherForecastItem
       v-for="(item, index) in weatherData"
       :imgUrl="item.weather[0].main.toLowerCase()"

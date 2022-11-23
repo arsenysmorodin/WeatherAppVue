@@ -1,8 +1,9 @@
 <template>
-  <div class="flex w-3/5 flex-col">
+  <div class="mr-4 flex w-3/5 flex-col">
     <CurrentTime class="mb-3"></CurrentTime>
     <CurrentDate class="mb-3"></CurrentDate>
-    <HelloUser></HelloUser>
+    <HelloUser class="mb-7"></HelloUser>
+    <WeatherForecast></WeatherForecast>
   </div>
 </template>
 
