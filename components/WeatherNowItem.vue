@@ -62,9 +62,6 @@ export default {
       return imageType
     },
   },
-  mounted() {
-    console.log(this.cartType.toLowerCase())
-  },
   props: {
     weatherData: {
       type: Object,

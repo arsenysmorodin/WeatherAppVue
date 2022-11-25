@@ -25,7 +25,7 @@ export default {
 
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${this.location.lat}&lon=${this.location.lon}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${this.location.latitude}&lon=${this.location.longitude}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
       )
       let result = response.data
       let weatherData = {
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     location() {
-      let location = this.$store.state.defaultLocation
+      let location = this.$store.state.locations[this.$store.state.index]
       return location
     },
   },

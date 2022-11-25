@@ -25,7 +25,7 @@ export default {
     const axios = require('axios')
     try {
       const response = await axios.get(
-        `https://api.bf5.ru/sun?lat=${this.location.lat}&lon=${this.location.lon}`
+        `https://api.bf5.ru/sun?lat=${this.location.latitude}&lon=${this.location.longitude}`
       )
       this.sunData = response.data
     } catch (error) {
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     location() {
-      let location = this.$store.state.defaultLocation
+      let location = this.$store.state.locations[this.$store.state.index]
       return location
     },
   },

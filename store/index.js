@@ -5,7 +5,12 @@ export default ({
             lon: 37.6155600,
             name: 'Moscow'
         },
-        locations: []
+        locations: [{
+            latitude: 55.7522200,
+            longitude: 37.6155600,
+            name: 'Moscow'
+        },],
+        index: 0
     },
     mutations: {
         addLocation(state, location) {
