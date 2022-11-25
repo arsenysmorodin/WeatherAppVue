@@ -3,7 +3,8 @@
     <input
       type="text"
       v-model="city"
-      class="h-12 w-full rounded-l-xl bg-sky-50 p-3"
+      placeholder="Choose a city!"
+      class="h-12 w-full rounded-l-xl bg-sky-50 p-3 text-lg text-gray-700 placeholder:text-gray-700"
       @enter="getCity"
     />
     <button

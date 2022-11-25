@@ -35,6 +35,24 @@ export default {
       let location = this.$store.state.locations[this.$store.state.index]
       return location
     },
+    storeIndex() {
+      return this.$store.state.index
+    },
+  },
+  watch: {
+    async storeIndex() {
+      const axios = require('axios')
+
+      try {
+        const response = await axios.get(
+          `http://api.airvisual.com/v2/nearest_city?lat=${this.location.latitude}&lon=${this.location.longitude}&key=1c1b9d4b-113d-4b61-8fd9-e8e601111f46`
+        )
+        let result = response.data.data.current.pollution.aqius
+        this.airQuality = result
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
   async mounted() {
     const axios = require('axios')

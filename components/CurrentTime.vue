@@ -20,7 +20,7 @@ export default {
       return currentTime
     },
     location() {
-      let location = this.$store.state.defaultLocation
+      let location = this.$store.state.locations[this.$store.state.index]
       return location
     },
   },

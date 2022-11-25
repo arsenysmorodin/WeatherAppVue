@@ -21,6 +21,19 @@ export default {
       sunData: {},
     }
   },
+  watch: {
+    async storeIndex() {
+      const axios = require('axios')
+      try {
+        const response = await axios.get(
+          `https://api.bf5.ru/sun?lat=${this.location.latitude}&lon=${this.location.longitude}`
+        )
+        this.sunData = response.data
+      } catch (error) {
+        console.error(error)
+      }
+    },
+  },
   async mounted() {
     const axios = require('axios')
     try {
@@ -36,6 +49,9 @@ export default {
     location() {
       let location = this.$store.state.locations[this.$store.state.index]
       return location
+    },
+    storeIndex() {
+      return this.$store.state.index
     },
   },
   components: { SunriseSundownItem },

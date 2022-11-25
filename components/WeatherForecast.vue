@@ -62,6 +62,34 @@ export default {
       let location = this.$store.state.locations[this.$store.state.index]
       return location
     },
+    storeIndex() {
+      return this.$store.state.index
+    },
+  },
+  watch: {
+    async storeIndex() {
+      const axios = require('axios')
+
+      try {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${this.location.latitude}&lon=${this.location.longitude}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
+        )
+        let result = response.data.list
+        let now = new Date()
+        let h = now.getHours()
+        let num = 8 - Math.floor(h / 3)
+        let weatherData = [
+          result[num + 3],
+          result[num + 3 + 8],
+          result[num + 3 + 16],
+          result[num + 3 + 24],
+          result[num + 3 + 31],
+        ]
+        this.weatherData = weatherData
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
 
   async mounted() {
