@@ -5,11 +5,18 @@ export default ({
             lon: 37.6155600,
             name: 'Moscow'
         },
+        locations: []
     },
     mutations: {
-
+        addLocation(state, location) {
+            state.locations.push(location);
+        },
     },
-    actions: {},
+    actions: {
+        addLocation({ commit }, location) {
+            commit("addLocation", location);
+        },
+    },
     getters: {},
     modules: {},
 });

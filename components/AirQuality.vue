@@ -45,13 +45,9 @@ export default {
       )
       let result = response.data.data.current.pollution.aqius
       this.airQuality = result
-      console.log(result)
     } catch (error) {
       console.error(error)
     }
-  },
-  mounted() {
-    console.log(this.location)
   },
 }
 </script>
