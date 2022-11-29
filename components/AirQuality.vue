@@ -18,17 +18,16 @@ export default {
   },
   computed: {
     airQualityTitle() {
-      switch (this.airQuality) {
-        case this.airQuality > 301:
-          return 'Hazardous'
-        case this.airQuality > 201:
-          return 'Very unhealthy'
-        case this.airQuality > 101:
-          return 'Unhealthy'
-        case this.airQuality > 51:
-          return 'Moderate'
-        default:
-          return 'Good'
+      if (this.airQuality > 301) {
+        return 'Hazardous'
+      } else if (this.airQuality > 201) {
+        return 'Very unhealthy'
+      } else if (this.airQuality > 101) {
+        return 'Unhealthy'
+      } else if (this.airQuality > 51) {
+        return 'Moderate'
+      } else {
+        return 'Good'
       }
     },
     location() {
@@ -51,6 +50,7 @@ export default {
           `http://api.airvisual.com/v2/nearest_city?lat=${this.location.latitude}&lon=${this.location.longitude}&key=1c1b9d4b-113d-4b61-8fd9-e8e601111f46`
         )
         let result = response.data.data.current.pollution.aqius
+        console.log(result)
         this.airQuality = result
       } catch (error) {
         console.error(error)
