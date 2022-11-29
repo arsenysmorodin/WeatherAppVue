@@ -1,6 +1,9 @@
 <template>
   <div class="item mb-5 flex flex-row items-center justify-between">
-    <p @click="changeIndex(index)" class="w-56 text-lg text-gray-700">
+    <p
+      @click="changeIndex(index)"
+      class="w-56 text-lg text-gray-700 dark:text-sky-100"
+    >
       <slot></slot>
     </p>
     <button
@@ -15,17 +18,27 @@
 <script>
 export default {
   data() {
-    return {
-      css: {
-        backgroundImage: `url(${require('@/assets/img/delete.png')})`,
-        backgroundSize: '1rem 1rem',
-      },
-    }
+    return {}
   },
   props: {
     index: {
       type: Number,
       required: true,
+    },
+  },
+  computed: {
+    css() {
+      if (this.$store.state.isDarkMode) {
+        return {
+          backgroundImage: `url(${require('@/assets/img/deleteLight.png')})`,
+          backgroundSize: '1rem 1rem',
+        }
+      } else {
+        return {
+          backgroundImage: `url(${require('@/assets/img/delete.png')})`,
+          backgroundSize: '1rem 1rem',
+        }
+      }
     },
   },
   methods: {

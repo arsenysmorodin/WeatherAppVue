@@ -1,6 +1,8 @@
 <template>
-  <div class="rounded-xl bg-white p-5 shadow-lg shadow-slate-200">
-    <h3 class="mb-5 text-lg text-gray-700">Sun movement</h3>
+  <div
+    class="rounded-xl bg-white p-5 shadow-lg shadow-slate-200 dark:bg-sky-800 dark:shadow-none"
+  >
+    <h3 class="mb-5 text-lg text-gray-700 dark:text-sky-300">Sun movement</h3>
     <div class="flex">
       <SunriseSundownItem type="sunrise">
         {{ sunData.sunrise }}

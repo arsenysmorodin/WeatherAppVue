@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-6xl font-bold text-sky-500">
+    <p class="text-6xl font-bold text-sky-400 dark:text-sky-100">
       {{ hour }}:{{ minutes }}, {{ this.location.name }}
     </p>
   </div>

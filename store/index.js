@@ -1,6 +1,5 @@
 export default ({
     state: {
-
         locations: [
             {
                 latitude: 55.7522200,
@@ -8,7 +7,8 @@ export default ({
                 name: 'Moscow'
             },
         ],
-        index: 0
+        index: 0,
+        isDarkMode: true,
     },
     mutations: {
         addLocation(state, location) {
@@ -25,6 +25,9 @@ export default ({
         changeIndex(state, i) {
             state.index = i;
         },
+        toogleDarkMode(state) {
+            state.isDarkMode = !state.isDarkMode
+        }
 
     },
     actions: {
@@ -36,6 +39,9 @@ export default ({
         },
         deleteLocation({ commit }, index) {
             commit("deleteLocation", index);
+        },
+        toogleDarkMode({ commit }) {
+            commit("toogleDarkMode");
         }
     },
     getters: {},

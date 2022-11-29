@@ -1,12 +1,12 @@
 <template>
   <div
     :style="css"
-    class="h-full rounded-xl bg-white p-5 pb-10 shadow-lg shadow-slate-200"
+    class="flex h-56 flex-col rounded-xl bg-white p-5 pb-10 shadow-lg shadow-slate-200 dark:bg-sky-800 dark:shadow-none"
   >
-    <h3 class="mb-5 text-lg text-gray-700">Air quality</h3>
-    <div class="mb-10 flex">
+    <h3 class="mb-5 text-lg text-gray-700 dark:text-sky-300">Air quality</h3>
+    <div class="flex w-full">
       <!-- <img class="w-1/4" :src="require(`~/assets/img/aq.png`)" /> -->
-      <p class="w-full text-center text-5xl">
+      <p class="w-full self-center pt-4 text-center text-5xl dark:text-sky-100">
         {{ this.airQualityTitle }}
       </p>
     </div>

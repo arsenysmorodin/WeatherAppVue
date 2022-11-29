@@ -1,7 +1,9 @@
 <template>
-  <div class="w-2/5 rounded-xl bg-white p-5 shadow-lg shadow-slate-200">
+  <div
+    class="w-2/5 rounded-xl bg-white p-5 shadow-lg shadow-slate-200 dark:bg-sky-800 dark:shadow-none"
+  >
     <ChooseCityInput class="mb-3"></ChooseCityInput>
-    <p class="mb-3 text-lg text-sky-500">Latest locations:</p>
+    <p class="mb-3 text-lg text-sky-500 dark:text-sky-300">Latest locations:</p>
     <div>
       <ChooseCityItem
         :key="index"

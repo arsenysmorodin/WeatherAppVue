@@ -10,14 +10,14 @@
         :class="{ 'h-36 text-5xl': isBig, 'text-3xl': !isBig }"
         class="flex w-full justify-center self-center text-center"
       >
-        <span class="my-auto w-full text-center">
+        <span class="my-auto w-full text-center dark:text-sky-100">
           {{ weatherData[this.cartTypeLowerCase] }}
           <span v-if="cartType === 'Temperature'">°C</span>
           <span v-if="cartType === 'Wind'">km/s</span>
         </span>
       </p>
     </div>
-    <p class="text-center text-base font-light text-gray-700">
+    <p class="text-center text-base font-light text-gray-700 dark:text-sky-300">
       {{ cartType }}
     </p>
   </div>

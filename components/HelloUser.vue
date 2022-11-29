@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-xl text-sky-500">Good morning, Arseniy!</p>
+    <p class="text-xl text-sky-400 dark:text-sky-100">Good morning, Arseniy!</p>
   </div>
 </template>
 <script>
