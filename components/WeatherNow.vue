@@ -20,26 +20,8 @@ export default {
       typesOfChildrens: ['Conditions', 'Temperature', 'Wind'],
     }
   },
-  async mounted() {
-    const axios = require('axios')
-
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${this.location.latitude}&lon=${this.location.longitude}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
-      )
-      let result = response.data
-      let weatherData = {
-        temperature: Math.round(result.main.temp),
-        wind: Math.round(result.wind.speed),
-        conditions: result.weather[0].main,
-      }
-      this.weather = weatherData
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  watch: {
-    async storeIndex() {
+  methods: {
+    async getWeather() {
       const axios = require('axios')
 
       try {
@@ -58,6 +40,17 @@ export default {
       }
     },
   },
+  mounted() {
+    this.getWeather()
+  },
+  watch: {
+    storeIndex() {
+      this.getWeather()
+    },
+    storeLocations() {
+      this.getWeather()
+    },
+  },
   computed: {
     location() {
       let location = this.$store.state.locations[this.$store.state.index]
@@ -65,6 +58,9 @@ export default {
     },
     storeIndex() {
       return this.$store.state.index
+    },
+    storeLocations() {
+      return this.$store.state.locations
     },
   },
 }

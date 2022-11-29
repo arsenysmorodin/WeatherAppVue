@@ -43,7 +43,6 @@ export default {
         } else {
           this.$store.dispatch('addLocation', response.data[0])
         }
-        console.log(response.data[0])
         this.city = ''
       } catch (error) {
         console.error(error)

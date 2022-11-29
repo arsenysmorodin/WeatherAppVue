@@ -21,8 +21,8 @@ export default {
       sunData: {},
     }
   },
-  watch: {
-    async storeIndex() {
+  methods: {
+    async getSunTime() {
       const axios = require('axios')
       try {
         const response = await axios.get(
@@ -32,6 +32,14 @@ export default {
       } catch (error) {
         console.error(error)
       }
+    },
+  },
+  watch: {
+    storeIndex() {
+      this.getSunTime()
+    },
+    storeLocations() {
+      this.getSunTime()
     },
   },
   async mounted() {
@@ -52,6 +60,9 @@ export default {
     },
     storeIndex() {
       return this.$store.state.index
+    },
+    storeLocations() {
+      return this.$store.state.locations
     },
   },
   components: { SunriseSundownItem },
