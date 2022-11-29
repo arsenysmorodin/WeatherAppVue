@@ -1,9 +1,12 @@
 <template>
-  <div class="rounded-xl bg-white p-5 pb-10 shadow-lg shadow-slate-200">
+  <div
+    :style="css"
+    class="h-full rounded-xl bg-white p-5 pb-10 shadow-lg shadow-slate-200"
+  >
     <h3 class="mb-5 text-lg text-gray-700">Air quality</h3>
-    <div class="flex">
-      <img class="w-1/4" :src="require(`~/assets/img/aq.png`)" />
-      <p class="w-full pt-8 text-center text-5xl">
+    <div class="mb-10 flex">
+      <!-- <img class="w-1/4" :src="require(`~/assets/img/aq.png`)" /> -->
+      <p class="w-full text-center text-5xl">
         {{ this.airQualityTitle }}
       </p>
     </div>
@@ -14,6 +17,12 @@ export default {
   data() {
     return {
       airQuality: null,
+      css: {
+        backgroundImage: `url(${require('@/assets/img/aq.png')})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '9rem 9rem',
+        backgroundPosition: 'bottom 20px left 20px',
+      },
     }
   },
   computed: {

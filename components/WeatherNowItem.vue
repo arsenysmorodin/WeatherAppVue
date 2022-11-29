@@ -1,14 +1,20 @@
 <template>
-  <div :class="{ 'w-full': isBig, 'w-1/2': !isBig }">
-    <div class="flex">
-      <img class="w-1/3" :src="require(`~/assets/img/${imageType}.png`)" />
+  <div
+    class="flex flex-col"
+    :style="css"
+    :class="{ 'h-40 w-full': isBig, 'w-1/2': !isBig }"
+  >
+    <div class="flex h-full justify-between">
+      <!-- <img class="w-1/3" :src="require(`~/assets/img/${imageType}.png`)" /> -->
       <p
-        :class="{ 'text-5xl': isBig, '-ml-28': isBig, 'text-3xl': !isBig }"
-        class="-ml-10 w-2/3 self-center text-center"
+        :class="{ 'h-36 text-5xl': isBig, 'text-3xl': !isBig }"
+        class="flex w-full justify-center self-center text-center"
       >
-        {{ weatherData[this.cartTypeLowerCase] }}
-        <span v-if="cartType === 'Temperature'">°C</span>
-        <span v-if="cartType === 'Wind'">km/s</span>
+        <span class="my-auto w-full text-center">
+          {{ weatherData[this.cartTypeLowerCase] }}
+          <span v-if="cartType === 'Temperature'">°C</span>
+          <span v-if="cartType === 'Wind'">km/s</span>
+        </span>
       </p>
     </div>
     <p class="text-center text-base font-light text-gray-700">
@@ -31,6 +37,27 @@ export default {
         return true
       } else {
         return false
+      }
+    },
+    css() {
+      if (this.isBig) {
+        return {
+          backgroundImage: `url(${require('@/assets/img/' +
+            this.imageType +
+            '.png')})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '12rem 12rem',
+          backgroundPosition: 'left',
+        }
+      } else {
+        return {
+          backgroundImage: `url(${require('@/assets/img/' +
+            this.imageType +
+            '.png')})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '5rem 5rem',
+          backgroundPosition: 'left',
+        }
       }
     },
 
