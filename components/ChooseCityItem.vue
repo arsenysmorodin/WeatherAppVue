@@ -1,10 +1,10 @@
 <template>
   <div class="item mb-5 flex flex-row items-center justify-between">
-    <p @click="changeIndex(index)" class="text-lg text-gray-700">
+    <p @click="changeIndex(index)" class="w-56 text-lg text-gray-700">
       <slot></slot>
     </p>
     <button
-      class="btn mr-8 hidden h-full w-full bg-center bg-no-repeat text-transparent"
+      class="btn mr-4 hidden h-full w-full bg-center bg-no-repeat text-transparent"
       :style="css"
       @click="deleteLocation(index)"
     >
