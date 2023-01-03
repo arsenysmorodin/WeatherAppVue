@@ -24,16 +24,19 @@ export default {
     }
   },
   methods: {
-    async getSunTime() {
+    getSunTime() {
       const axios = require('axios')
-      try {
-        const response = await axios.get(
-          `https://api.bf5.ru/sun?lat=${this.location.latitude}&lon=${this.location.longitude}`
+      axios
+        .get(
+          `https://api.ipgeolocation.io/astronomy?apiKey=211cb7d11abf44df83ca37cffd091bfc&lat=${this.location.latitude}&long=${this.location.longitude}`
         )
-        this.sunData = response.data
-      } catch (error) {
-        console.error(error)
-      }
+        .then((response) => {
+          console.log(response.data)
+          this.sunData = {
+            sunrise: response.data.sunrise,
+            sunset: response.data.sunset,
+          }
+        })
     },
   },
   watch: {
@@ -44,16 +47,8 @@ export default {
       this.getSunTime()
     },
   },
-  async mounted() {
-    const axios = require('axios')
-    try {
-      const response = await axios.get(
-        `https://api.bf5.ru/sun?lat=${this.location.latitude}&lon=${this.location.longitude}`
-      )
-      this.sunData = response.data
-    } catch (error) {
-      console.error(error)
-    }
+  mounted() {
+    this.getSunTime()
   },
   computed: {
     location() {
