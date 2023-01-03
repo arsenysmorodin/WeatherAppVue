@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-6xl font-bold text-sky-400 dark:text-sky-100">
-      {{ hour }}:{{ minutes }}, {{ this.location.name }}
+      {{ time }}, {{ this.location.name }}
     </p>
   </div>
 </template>
@@ -9,8 +9,7 @@
 export default {
   data() {
     return {
-      hour: '',
-      minutes: '',
+      time: '',
     }
   },
   computed: {
@@ -27,14 +26,15 @@ export default {
   },
   methods: {
     getTime() {
-      const date = new Date()
-
-      this.hour = String(date.getHours())
-      this.minutes = String(date.getMinutes())
-
-      if (this.minutes.length === 1) {
-        this.minutes = '0' + this.minutes
-      }
+      const axios = require('axios')
+      axios
+        .get(
+          `https://api.ipgeolocation.io/timezone?apiKey=211cb7d11abf44df83ca37cffd091bfc&lat=${this.location.latitude}&long=${this.location.longitude}`
+        )
+        .then((response) => {
+          console.log(response)
+          this.time = response.data.time_24.slice(0, 5)
+        })
     },
   },
   mounted() {
