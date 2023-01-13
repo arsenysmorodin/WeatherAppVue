@@ -5,78 +5,82 @@
   >
     <h3 class="mb-5 text-lg text-gray-700 dark:text-sky-300">Air quality</h3>
     <div class="flex w-full">
-      <!-- <img class="w-1/4" :src="require(`~/assets/img/aq.png`)" /> -->
       <p class="w-full self-center pt-4 text-center text-5xl dark:text-sky-100">
-        {{ this.airQualityTitle }}
+        {{ airQualityTitle }}
       </p>
     </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      airQuality: null,
-      css: {
-        backgroundImage: `url(${require('@/assets/img/aq.png')})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: '9rem 9rem',
-        backgroundPosition: 'bottom 20px left 20px',
-      },
-    }
-  },
-  computed: {
-    airQualityTitle() {
-      if (this.airQuality > 301) {
-        return 'Hazardous'
-      } else if (this.airQuality > 201) {
-        return 'Very unhealthy'
-      } else if (this.airQuality > 101) {
-        return 'Unhealthy'
-      } else if (this.airQuality > 51) {
-        return 'Moderate'
-      } else {
-        return 'Good'
-      }
-    },
-    location() {
-      let location = this.$store.state.locations[this.$store.state.index]
-      return location
-    },
-    storeIndex() {
-      return this.$store.state.index
-    },
-    storeLocations() {
-      return this.$store.state.locations
-    },
-  },
-  methods: {
-    async getAirQuality() {
-      const axios = require('axios')
 
-      try {
-        const response = await axios.get(
-          `http://api.airvisual.com/v2/nearest_city?lat=${this.location.latitude}&lon=${this.location.longitude}&key=1c1b9d4b-113d-4b61-8fd9-e8e601111f46`
-        )
-        let result = response.data.data.current.pollution.aqius
-        console.log(result)
-        this.airQuality = result
-      } catch (error) {
-        console.error(error)
-      }
-    },
-  },
-  watch: {
-    storeIndex() {
-      this.getAirQuality()
-    },
-    storeLocations() {
-      this.getAirQuality()
-    },
-  },
-  mounted() {
-    this.getAirQuality()
-  },
+<script setup>
+import { ref, onMounted, watch, computed } from 'vue'
+import { useStore } from '@nuxtjs/composition-api'
+
+const store = useStore()
+
+const css = ref({
+  backgroundImage: `url(${require('@/assets/img/aq.png')})`,
+  backgroundRepeat: 'no-repeat',
+  backgroundSize: '9rem 9rem',
+  backgroundPosition: 'bottom 20px left 20px',
+})
+let airQuality = ref(null)
+
+const airQualityTitle = computed(() => {
+  if (airQuality.value > 301) {
+    return 'Hazardous'
+  } else if (airQuality.value > 201) {
+    return 'Very unhealthy'
+  } else if (airQuality.value > 101) {
+    return 'Unhealthy'
+  } else if (airQuality.value > 51) {
+    return 'Moderate'
+  } else {
+    return 'Good'
+  }
+})
+
+const location = () => {
+  return store.state.locations[store.state.index]
 }
+
+let storeIndex = () => {
+  return store.state.index
+}
+
+let storeLocations = () => {
+  return store.state.locations
+}
+
+const getAirQuality = async () => {
+  const axios = require('axios')
+
+  try {
+    const response = await axios.get(
+      `http://api.airvisual.com/v2/nearest_city?lat=${
+        location().latitude
+      }&lon=${location().longitude}&key=1c1b9d4b-113d-4b61-8fd9-e8e601111f46`
+    )
+    let result = response.data.data.current.pollution.aqius
+    airQuality.value = result
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+watch(storeIndex, (newValue, oldValue) => {
+  getAirQuality()
+})
+
+watch(
+  storeLocations,
+  (newValue, oldValue) => {
+    getAirQuality()
+  },
+  { deep: true }
+)
+
+onMounted(() => {
+  getAirQuality()
+})
 </script>
-<style></style>

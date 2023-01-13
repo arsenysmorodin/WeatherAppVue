@@ -9,14 +9,3 @@
     </div>
   </div>
 </template>
-<script>
-import AirQuality from './AirQuality.vue'
-import SunriseSundown from './SunriseSundown.vue'
-import WeatherForecast from './WeatherForecast.vue'
-import WeatherNow from './WeatherNow.vue'
-
-export default {
-  components: { WeatherForecast, WeatherNow, SunriseSundown, AirQuality },
-}
-</script>
-<style></style>

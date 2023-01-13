@@ -8,64 +8,72 @@
         v-for="(item, index) in typesOfChildrens"
         :key="item"
         :weatherData="weather"
-        :cartType="typesOfChildrens[index]"
+        :cartType="item"
       ></WeatherNowItem>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      weather: {},
-      typesOfChildrens: ['Conditions', 'Temperature', 'Wind'],
-    }
-  },
-  methods: {
-    async getWeather() {
-      const axios = require('axios')
+<script setup>
+import { ref, onMounted, watch, computed } from 'vue'
+import { useStore } from '@nuxtjs/composition-api'
 
-      try {
-        const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${this.location.latitude}&lon=${this.location.longitude}&appid=a158065199118bd588aed3a9d406f38f&units=metric`
-        )
-        let result = response.data
-        let weatherData = {
-          temperature: Math.round(result.main.temp),
-          wind: Math.round(result.wind.speed),
-          conditions: result.weather[0].main,
-        }
-        this.weather = weatherData
-      } catch (error) {
-        console.error(error)
-      }
-    },
-  },
-  mounted() {
-    this.getWeather()
-  },
-  watch: {
-    storeIndex() {
-      this.getWeather()
-    },
-    storeLocations() {
-      this.getWeather()
-    },
-  },
-  computed: {
-    location() {
-      let location = this.$store.state.locations[this.$store.state.index]
-      return location
-    },
-    storeIndex() {
-      return this.$store.state.index
-    },
-    storeLocations() {
-      return this.$store.state.locations
-    },
-  },
+const store = useStore()
+
+const weather = ref({
+  temperature: null,
+  wind: null,
+  conditions: null,
+})
+const typesOfChildrens = ref(['Conditions', 'Temperature', 'Wind'])
+
+const getWeather = async () => {
+  const axios = require('axios')
+
+  try {
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${
+        location().latitude
+      }&lon=${
+        location().longitude
+      }&appid=a158065199118bd588aed3a9d406f38f&units=metric`
+    )
+    let result = response.data
+
+    weather.value.temperature = Math.round(result.main.temp)
+    weather.value.wind = Math.round(result.wind.speed)
+    weather.value.conditions = result.weather[0].main
+  } catch (error) {
+    console.error(error)
+  }
 }
-</script>
 
-<style></style>
+onMounted(() => {
+  getWeather()
+  console.log(typesOfChildrens.value)
+})
+
+const location = () => {
+  return store.state.locations[store.state.index]
+}
+
+let storeIndex = () => {
+  return store.state.index
+}
+
+let storeLocations = () => {
+  return store.state.locations
+}
+
+watch(storeIndex, (newValue, oldValue) => {
+  getWeather()
+})
+
+watch(
+  storeLocations,
+  (newValue, oldValue) => {
+    getWeather()
+  },
+  { deep: true }
+)
+</script>

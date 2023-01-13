@@ -1,53 +1,56 @@
 <template>
   <div>
     <p class="text-6xl font-bold text-sky-400 dark:text-sky-100">
-      {{ time }}, {{ this.location.name }}
+      {{ time }}, {{ location().name }}
     </p>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      time: '',
-    }
-  },
-  computed: {
-    location() {
-      let location = this.$store.state.locations[this.$store.state.index]
-      return location
-    },
-    storeIndex() {
-      return this.$store.state.index
-    },
-    storeLocations() {
-      return this.$store.state.locations
-    },
-  },
-  methods: {
-    getTime() {
-      const axios = require('axios')
-      axios
-        .get(
-          `https://api.ipgeolocation.io/timezone?apiKey=211cb7d11abf44df83ca37cffd091bfc&lat=${this.location.latitude}&long=${this.location.longitude}`
-        )
-        .then((response) => {
-          console.log(response)
-          this.time = response.data.time_24.slice(0, 5)
-        })
-    },
-  },
-  mounted() {
-    this.getTime()
-  },
-  watch: {
-    storeIndex() {
-      this.getTime()
-    },
-    storeLocations() {
-      this.getTime()
-    },
-  },
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useStore } from '@nuxtjs/composition-api'
+
+let time = ref('')
+
+const store = useStore()
+
+const location = () => {
+  return store.state.locations[store.state.index]
 }
+
+let storeIndex = () => {
+  return store.state.index
+}
+
+let storeLocations = () => {
+  return store.state.locations
+}
+
+const getTime = () => {
+  const axios = require('axios')
+  axios
+    .get(
+      `https://api.ipgeolocation.io/timezone?apiKey=211cb7d11abf44df83ca37cffd091bfc
+      &lat=${location().latitude}
+      &long=${location().longitude}`
+    )
+    .then((response) => {
+      time.value = response.data.time_24.slice(0, 5)
+    })
+}
+
+onMounted(() => {
+  getTime()
+})
+
+watch(storeIndex, (newValue, oldValue) => {
+  getTime()
+})
+
+watch(
+  storeLocations,
+  (newValue, oldValue) => {
+    getTime()
+  },
+  { deep: true }
+)
 </script>
-<style></style>

@@ -14,11 +14,13 @@
     </p>
   </div>
 </template>
-<script>
-export default {
-  props: {
-    imgUrl: { type: String, required: true, default: 'fog' },
+<script setup>
+const props = defineProps({
+  imgUrl: {
+    type: String,
+    required: true,
+    default: 'fog',
   },
-}
+})
 </script>
 <style></style>

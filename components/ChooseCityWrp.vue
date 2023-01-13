@@ -8,14 +8,18 @@
       <ChooseCityItem
         :key="index"
         :index="index"
-        v-for="(item, index) in this.$store.state.locations"
+        v-for="(item, index) in locations()"
       >
         {{ item.name }}
       </ChooseCityItem>
     </div>
   </div>
 </template>
-<script>
-export default {}
+<script setup>
+import { useStore } from '@nuxtjs/composition-api'
+const store = useStore()
+
+const locations = () => {
+  return store.state.locations
+}
 </script>
-<style></style>

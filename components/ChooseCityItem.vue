@@ -15,40 +15,39 @@
     </button>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {}
+<script setup>
+import { computed } from 'vue'
+import { useStore } from '@nuxtjs/composition-api'
+
+const store = useStore()
+
+const props = defineProps({
+  index: {
+    type: Number,
+    required: true,
   },
-  props: {
-    index: {
-      type: Number,
-      required: true,
-    },
-  },
-  computed: {
-    css() {
-      if (this.$store.state.isDarkMode) {
-        return {
-          backgroundImage: `url(${require('@/assets/img/deleteLight.png')})`,
-          backgroundSize: '1rem 1rem',
-        }
-      } else {
-        return {
-          backgroundImage: `url(${require('@/assets/img/delete.png')})`,
-          backgroundSize: '1rem 1rem',
-        }
-      }
-    },
-  },
-  methods: {
-    changeIndex(index) {
-      this.$store.dispatch('changeIndex', index)
-    },
-    deleteLocation(index) {
-      this.$store.dispatch('deleteLocation', index)
-    },
-  },
+})
+
+const css = computed(() => {
+  if (store.state.isDarkMode) {
+    return {
+      backgroundImage: `url(${require('@/assets/img/deleteLight.png')})`,
+      backgroundSize: '1rem 1rem',
+    }
+  } else {
+    return {
+      backgroundImage: `url(${require('@/assets/img/delete.png')})`,
+      backgroundSize: '1rem 1rem',
+    }
+  }
+})
+
+const changeIndex = (index) => {
+  store.dispatch('changeIndex', index)
+}
+
+const deleteLocation = (index) => {
+  store.dispatch('deleteLocation', index)
 }
 </script>
 <style>

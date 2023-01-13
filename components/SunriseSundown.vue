@@ -4,66 +4,66 @@
   >
     <h3 class="mb-5 text-lg text-gray-700 dark:text-sky-300">Sun movement</h3>
     <div class="flex">
-      <SunriseSundownItem type="sunrise">
+      <SunriseSundownItem typeImg="sunrise">
         {{ sunData.sunrise }}
       </SunriseSundownItem>
-      <SunriseSundownItem type="sunset">
+      <SunriseSundownItem typeImg="sunset">
         {{ sunData.sunset }}
       </SunriseSundownItem>
     </div>
   </div>
 </template>
 
-<script>
-import SunriseSundownItem from './SunriseSundownItem.vue'
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useStore } from '@nuxtjs/composition-api'
 
-export default {
-  data() {
-    return {
-      sunData: {},
-    }
-  },
-  methods: {
-    getSunTime() {
-      const axios = require('axios')
-      axios
-        .get(
-          `https://api.ipgeolocation.io/astronomy?apiKey=211cb7d11abf44df83ca37cffd091bfc&lat=${this.location.latitude}&long=${this.location.longitude}`
-        )
-        .then((response) => {
-          console.log(response.data)
-          this.sunData = {
-            sunrise: response.data.sunrise,
-            sunset: response.data.sunset,
-          }
-        })
-    },
-  },
-  watch: {
-    storeIndex() {
-      this.getSunTime()
-    },
-    storeLocations() {
-      this.getSunTime()
-    },
-  },
-  mounted() {
-    this.getSunTime()
-  },
-  computed: {
-    location() {
-      let location = this.$store.state.locations[this.$store.state.index]
-      return location
-    },
-    storeIndex() {
-      return this.$store.state.index
-    },
-    storeLocations() {
-      return this.$store.state.locations
-    },
-  },
-  components: { SunriseSundownItem },
+const sunData = ref({
+  sunrise: null,
+  sunset: null,
+})
+
+const getSunTime = () => {
+  const axios = require('axios')
+  axios
+    .get(
+      `https://api.ipgeolocation.io/astronomy?apiKey=211cb7d11abf44df83ca37cffd091bfc
+      &lat=${location().latitude}
+      &long=${location().longitude}`
+    )
+    .then((response) => {
+      sunData.value.sunrise = response.data.sunrise
+      sunData.value.sunset = response.data.sunset
+    })
 }
-</script>
 
-<style></style>
+onMounted(() => {
+  getSunTime()
+})
+
+const store = useStore()
+
+const location = () => {
+  return store.state.locations[store.state.index]
+}
+
+let storeIndex = () => {
+  return store.state.index
+}
+
+let storeLocations = () => {
+  return store.state.locations
+}
+
+watch(storeIndex, (newValue, oldValue) => {
+  getSunTime()
+})
+
+watch(
+  storeLocations,
+  (newValue, oldValue) => {
+    getSunTime()
+  },
+  { deep: true }
+)
+</script>
